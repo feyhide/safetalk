@@ -1,5 +1,5 @@
 import express from 'express'
-import { changePassword, changePasswordByOtp, signin, signout, signup, verifyOTP, verifyOTPforPassword } from '../controller/auth.js'
+import { signin, signout, signup, verifyOTP} from '../controller/auth.js'
 
 const router = express.Router()
 
