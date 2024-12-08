@@ -11,7 +11,6 @@ dotenv.config();
 
 export const sendUserInfo = async (user) => {
     const userObject = user.toObject();
-    delete userObject._id;
     delete userObject.password;
     return userObject;
 };
@@ -51,7 +50,7 @@ export const signup = async (req, res) => {
         pipeline.del(otpKey);
         pipeline.del(tempUserKey);
         pipeline.setex(otpKey, 60, otp);
-        pipeline.setex(tempUserKey, 600, JSON.stringify({ fullname, username, email, hashedPassword }));
+        pipeline.setex(tempUserKey, 600, JSON.stringify({ username, email, hashedPassword }));
         await pipeline.exec(); 
 
         await transporter.sendMail({
@@ -144,6 +143,7 @@ export const signin = async (req, res, next) => {
 
         return sendSuccess(res,'Logged in successfully.',await sendUserInfo(validUser),200);
     } catch (error) {
+        console.log(error)
         return sendError(res,'Sign in failed. Try again later',null,500)
     }
 };
