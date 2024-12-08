@@ -6,6 +6,7 @@ import cors from 'cors'
 import Redis from "ioredis"
 import authRouter from './route/auth.js'
 import userRouter from './route/user.js'
+import setUpSocket from './socket/socket.js';
 
 dotenv.config();
 
@@ -36,6 +37,8 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+setUpSocket(server);
