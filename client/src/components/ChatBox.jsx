@@ -15,6 +15,8 @@ const ChatBox = () => {
         return <div>Loading socket connection...</div>;
     }
 
+    
+
     const handleSendMessage = () => {
         if (selectedChat) {
             socket.emit("sendMessage", {
@@ -28,7 +30,8 @@ const ChatBox = () => {
 
     return (
         <div className="w-screen h-screen bg-blue-500 flex flex-col">
-            <p onClick={()=>dispatch(reset())}>back</p>
+            <p onClick={() => { dispatch(reset()), console.log(selectedChat) }}>back</p>
+
             <p>Chat name: {selectedChat?.username}</p>
             
             {/* Display the messages */}

@@ -5,7 +5,9 @@ import ChatBox from '../components/ChatBox';
 
 const Chat = () => {
     const {selectedChat} = useSelector(state => state.chat);
-
+    useEffect(() => {
+        console.log("selectedChat changed:", selectedChat);
+    }, [selectedChat]);
     return (
         selectedChat ? <ChatBox/> : <ChatList/> 
     )

@@ -41,7 +41,8 @@ export const SocketProvider = ({ children }) => {
             });
 
             const handleReceivedMessage = (message) => {
-                if (selectedChat && (selectedChat._id === message.sender || selectedChat._id === message.recipient)) {
+                console.log(selectedChat,currentUser,message)
+                if (selectedChat && (selectedChat._id === message.sender || selectedChat._id === message.recipient) && (currentUser._id === message.sender || currentUser._id === message.recipient)) {
                     console.log(message)
                     dispatch(appendMessage(message));
                 }
